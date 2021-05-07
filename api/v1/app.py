@@ -9,12 +9,19 @@ import os
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
-
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
 @app.teardown_appcontext
 def teardown_db(exception):
     """ method to close the session after each request """
     storage.close()
+
+
+@app.errorhandler(404)
+def resource_not_found(e):
+    """ method to handle 404 error """
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
 
 if __name__ == '__main__':
     if os.getenv("HBNB_API_HOST"):
@@ -26,9 +33,3 @@ if __name__ == '__main__':
     else:
         prt = 5000
     app.run(host=hst, port=prt, threaded=True)
-
-
-@app.errorhandler(404)
-def resource_not_found(e):
-    """ method to handle 404 error """
-    return make_response(jsonify({'error': 'Not found'}), 404)
