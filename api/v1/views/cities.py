@@ -8,7 +8,8 @@ from models.state import State
 from models.city import City
 
 
-@app_views.route("/states/<state_id>/cities", methods=["GET", "POST"])
+@app_views.route("/states/<state_id>/cities", methods=["GET", "POST"],
+                 strict_slashes=False)
 def statecities(state_id=None):
     """ method for get and post cities """
     if request.method == "GET":
@@ -34,7 +35,8 @@ def statecities(state_id=None):
         return make_response(jsonify(objcity.to_dict()), 201)
 
 
-@app_views.route("/cities/<city_id>", methods=["GET", "DELETE", "PUT"])
+@app_views.route("/cities/<city_id>", methods=["GET", "DELETE", "PUT"],
+                 strict_slashes=False)
 def getcity(city_id=None):
     """ method for get, delete and put cities. """
     if request.method == "GET":
