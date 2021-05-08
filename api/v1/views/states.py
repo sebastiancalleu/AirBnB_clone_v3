@@ -37,7 +37,7 @@ def states(state_id=None):
             jsondata = request.get_json()
         except:
             abort(400, description="Not a JSON")
-        if not jsondata["name"]:
+        if "name" in jsondata:
             abort(400, description="Missing name")
         newobj = State(**jsondata)
         newobj.save()
