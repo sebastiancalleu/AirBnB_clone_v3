@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ module to create the routes of the blueprint object """
 
-from ..views import app_views
+from api.v1.views import app_views
 from flask import jsonify, json
 from models import storage
 from models.amenity import Amenity
