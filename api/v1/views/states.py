@@ -49,7 +49,7 @@ def statepost():
 
 
 @app_views.route('/states/<state_id>', methods=["PUT"], strict_slashes=False)
-def stateput():
+def stateput(state_id=None):
     try:
         jsonupdt = request.get_json()
     except:
