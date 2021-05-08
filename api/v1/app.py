@@ -21,7 +21,7 @@ def teardown_db(exception):
 @app.errorhandler(404)
 def resource_not_found(e):
     """ method to handle 404 error """
-    return make_response(jsonify({'error': 'Not found'}), 404)
+    return make_response(jsonify({"error": "Not found"}), 404)
 
 
 if __name__ == '__main__':
