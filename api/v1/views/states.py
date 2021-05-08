@@ -24,7 +24,7 @@ def states(state_id=None):
                 obj1 = storage.get(State, state_id)
             except:
                 abort(404)
-            return make_response(jsonify(obj1.to_dict()))
+            return jsonify(obj1.to_dict())
     if request.method == "DELETE":
             try:
                 obj1 = storage.get(State, state_id)
@@ -37,7 +37,7 @@ def states(state_id=None):
             jsondata = request.get_json()
         except:
             abort(400, description="Not a JSON")
-        if "name" in jsondata:
+        if not "name" in jsondata:
             abort(400, description="Missing name")
         newobj = State(**jsondata)
         newobj.save()
