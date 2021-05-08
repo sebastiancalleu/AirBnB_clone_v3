@@ -34,17 +34,18 @@ def states(state_id=None):
         if not request.get_json():
             abort(400, description="Not a JSON")
         jsondata = request.get_json()
-        if not "name" in jsondata:
+        if "name" not in jsondata:
             abort(400, description="Missing name")
         newobj = State(**jsondata)
         newobj.save()
         return make_response(jsonify(newobj.to_dict()), 201)
     if request.method == "PUT":
-        state = storage.get(State, state_id)
-        if not state:
+        obj1 = storage.get(State, state_id)
+        if not obj1:
             abort(404)
         if not request.get_json():
             abort(400, description="Not a JSON")
+        jsonupdt = request.get_json()
         for i, j in jsonupdt.items():
             if i != "id" and i != "created_at" and i != "updated_at":
                 setattr(obj1, i, j)
