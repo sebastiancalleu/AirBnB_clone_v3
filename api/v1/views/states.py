@@ -24,7 +24,7 @@ def states(state_id=None):
                 obj1 = storage.get(State, state_id)
             except:
                 abort(404)
-            return jsonify(obj1.to_dict())
+            return make_response(jsonify(obj1.to_dict()))
     if request.method == "DELETE":
             try:
                 obj1 = storage.get(State, state_id)
@@ -52,7 +52,7 @@ def states(state_id=None):
         except:
             abort(404)
         for i, j in jsonupdt.items():
-            if i != "id" or i != "created_at" or i != "updated_at":
+            if i != "id" and i != "created_at" and i != "updated_at":
                 setattr(obj1, i, j)
         obj1.save()
         return make_response(jsonify(obj1.to_dict()), 200)
