@@ -6,7 +6,7 @@ from flask import jsonify, json, abort, request, make_response
 from models import storage
 from models.state import State
 
-
+"""
 @app_views.route('/states', methods=["GET"], strict_slashes=False)
 def statesgetall():
     dct1 = storage.all(State)
@@ -68,7 +68,7 @@ def stateput(state_id=None):
 @app_views.route('/states', methods=["GET", "POST"], strict_slashes=False)
 @app_views.route('/states/<state_id>', methods=["GET", "DELETE", "PUT"], strict_slashes=False)
 def states(state_id=None):
-    ´´´ method to manipulate states object ´´´
+    """ method to manipulate states object """
     if request.method == "GET":
         if state_id is None:
             dct1 = storage.all(State)
@@ -113,4 +113,3 @@ def states(state_id=None):
                 setattr(obj1, i, j)
         obj1.save()
         return make_response(jsonify(obj1.to_dict()), 200)
-"""
