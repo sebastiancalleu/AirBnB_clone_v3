@@ -8,7 +8,7 @@ from models.state import State
 
 
 @app_views.route('/states', methods=["GET", "POST"], strict_slashes=False)
-@app_views.route('/states/<state_id>', methods=["GET", "DELETE", "PUT"])
+@app_views.route('/states/<state_id>', methods=["GET", "DELETE", "PUT"], strict_slashes=False)
 def states(state_id=None):
     """ method to manipulate states object """
     if request.method == "GET":
