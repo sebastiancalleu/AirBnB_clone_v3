@@ -20,37 +20,31 @@ def states(state_id=None):
                 lt1.append(i.to_dict())
             return jsonify(lt1)
         else:
-            try:
-                obj1 = storage.get(State, state_id)
-            except:
+            obj1 = storage.get(State, state_id)
+            if not obj1:
                 abort(404)
             return jsonify(obj1.to_dict())
     if request.method == "DELETE":
-            try:
-                obj1 = storage.get(State, state_id)
-            except:
+            obj1 = storage.get(State, state_id)
+            if not obj1:
                 abort(404)
             storage.delete(obj1)
             return make_response(jsonify({}), 200)
     if request.method == "POST":
-        try:
-            jsondata = request.get_json()
-        except:
+        if not request.get_json():
             abort(400, description="Not a JSON")
+        jsondata = request.get_json()
         if not "name" in jsondata:
             abort(400, description="Missing name")
         newobj = State(**jsondata)
         newobj.save()
         return make_response(jsonify(newobj.to_dict()), 201)
     if request.method == "PUT":
-        try:
-            jsonupdt = request.get_json()
-        except:
-            abort(400, description="Not a JSON")
-        try:
-            obj1 = storage.get(State, state_id)
-        except:
+        state = storage.get(State, state_id)
+        if not state:
             abort(404)
+        if not request.get_json():
+            abort(400, description="Not a JSON")
         for i, j in jsonupdt.items():
             if i != "id" and i != "created_at" and i != "updated_at":
                 setattr(obj1, i, j)
