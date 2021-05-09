@@ -15,7 +15,8 @@ from models.user import User
 @app_views.route('/status')
 def jsonresponse():
     """ method to response with a json file """
-    return jsonify({'status': 'ok'})
+    if request.method == 'GET':
+        return jsonify({'status': 'ok'})
 
 
 @app_views.route('/stats')
