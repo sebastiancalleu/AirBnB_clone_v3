@@ -22,11 +22,12 @@ def jsonresponse():
 @app_views.route('/stats')
 def stats():
     """ method to response with the count of all objects in storage """
-    dct1 = {}
-    dct1["amenities"] = storage.count(Amenity)
-    dct1["cities"] = storage.count(City)
-    dct1["places"] = storage.count(Place)
-    dct1["reviews"] = storage.count(Review)
-    dct1["states"] = storage.count(State)
-    dct1["users"] = storage.count(User)
-    return jsonify(dct1)
+    if request.method == 'GET':
+        dct1 = {}
+        dct1["amenities"] = storage.count(Amenity)
+        dct1["cities"] = storage.count(City)
+        dct1["places"] = storage.count(Place)
+        dct1["reviews"] = storage.count(Review)
+        dct1["states"] = storage.count(State)
+        dct1["users"] = storage.count(User)
+        return jsonify(dct1)
