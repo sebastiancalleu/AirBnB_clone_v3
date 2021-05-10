@@ -6,9 +6,9 @@ from flask import jsonify, json, abort, request, make_response
 from models import storage
 from models.place import Place
 from models.city import City
+from models.user import User
 
-
-@app_views.route("/cities/<city_id>/places", methods=["GET"],
+@app_views.route("/cities/<city_id>/places", methods=["GET", "POST"],
                  strict_slashes=False)
 def placesincity(city_id=None):
     if request.method == "GET":
@@ -33,6 +33,7 @@ def placesincity(city_id=None):
             abort(404)
         if "name" not in jsondata:
             abort(400, description="Missing name")
+        jsondata["city_id"] = city_id
         objplace = Place(**jsondata)
         objplace.save()
         return make_response(jsonify(objplace.to_dict()), 201)
@@ -63,4 +64,5 @@ def placeobj(place_id=None):
             if (i != "id" and i != "city_id" and
                     i != "created_at" and i != "updated_at"):
                 setattr(objplace, i, j)
-        return make_response(jsonify(objplace.to_dict), 200)
+        objplace.save()
+        return make_response(jsonify(objplace.to_dict()), 200)
