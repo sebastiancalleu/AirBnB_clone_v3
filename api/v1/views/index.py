@@ -2,7 +2,7 @@
 """ module to create the routes of the blueprint object """
 
 from api.v1.views import app_views
-from flask import jsonify, json, request
+from flask import jsonify, json, request, make_response
 from models import storage
 from models.amenity import Amenity
 from models.city import City
@@ -16,7 +16,7 @@ from models.user import User
 def jsonresponse():
     """ method to response with a json file """
     if request.method == 'GET':
-        return jsonify({'status': 'ok'})
+        return make_response(jsonify({'status': 'ok'}))
 
 
 @app_views.route('/stats', methods=['GET'])
@@ -30,4 +30,4 @@ def stats():
         dct1["reviews"] = storage.count(Review)
         dct1["states"] = storage.count(State)
         dct1["users"] = storage.count(User)
-        return jsonify(dct1)
+        return make_response(jsonify(dct1))
