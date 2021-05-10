@@ -16,7 +16,7 @@ from models.user import User
 def jsonresponse():
     """ method to response with a json file """
     if request.method == 'GET':
-        return make_response(jsonify({'status': 'ok'}))
+        return make_response(jsonify({'status': 'ok'}), 200)
 
 
 @app_views.route('/stats', methods=['GET'])
@@ -30,4 +30,4 @@ def stats():
         dct1["reviews"] = storage.count(Review)
         dct1["states"] = storage.count(State)
         dct1["users"] = storage.count(User)
-        return make_response(jsonify(dct1))
+        return make_response(jsonify(dct1), 200)
