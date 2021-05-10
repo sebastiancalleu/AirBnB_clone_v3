@@ -12,14 +12,14 @@ from models.state import State
 from models.user import User
 
 
-@app_views.route('/status', strict_slashes=False)
+@app_views.route('/status')
 def jsonresponse():
     """ method to response with a json file """
     if request.method == 'GET':
         return jsonify({'status': 'ok'})
 
 
-@app_views.route('/stats', strict_slashes=False)
+@app_views.route('/stats')
 def stats():
     """ method to response with the count of all objects in storage """
     if request.method == 'GET':
