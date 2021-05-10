@@ -12,11 +12,10 @@ from models.state import State
 from models.user import User
 
 
-@app_views.route('/status', methods=['GET'])
+@app_views.route('/status', strict_slashes=False)
 def jsonresponse():
     """ method to response with a json file """
-    if request.method == 'GET':
-        return make_response(jsonify({'status': 'ok'}), 200)
+    return jsonify({"status": "ok"})
 
 
 @app_views.route('/stats', methods=['GET'])
