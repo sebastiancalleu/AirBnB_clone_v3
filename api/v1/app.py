@@ -4,6 +4,7 @@
 from api.v1.views import app_views
 from flask import Flask, jsonify, make_response
 from models import storage
+from flask_cors import CORS
 import os
 
 
@@ -12,6 +13,7 @@ app.register_blueprint(app_views)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 # add strict slashes
 app.url_map.strict_slashes = False
+cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 
 @app.teardown_appcontext
