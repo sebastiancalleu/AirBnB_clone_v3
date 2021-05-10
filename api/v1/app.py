@@ -29,13 +29,10 @@ def resource_not_found(e):
 
 
 if __name__ == '__main__':
-    """ main """
-    if os.getenv("HBNB_API_HOST"):
-        hst = os.getenv("HBNB_API_HOST")
-    else:
+    hst = os.getenv("HBNB_API_HOST")
+    port = os.getenv("HBNB_API_PORT")
+    if not hst:
         hst = "0.0.0.0"
-    if os.getenv("HBNB_API_PORT"):
-        prt = os.getenv("HBNB_API_PORT")
-    else:
-        prt = 5000
+    if not prt:
+        prt = "5000"
     app.run(host=hst, port=prt, threaded=True)
