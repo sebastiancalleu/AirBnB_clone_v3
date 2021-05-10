@@ -30,7 +30,7 @@ def resource_not_found(e):
 
 if __name__ == '__main__':
     hst = os.getenv("HBNB_API_HOST")
-    port = os.getenv("HBNB_API_PORT")
+    prt = os.getenv("HBNB_API_PORT")
     if not hst:
         hst = "0.0.0.0"
     if not prt:
